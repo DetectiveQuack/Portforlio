@@ -1,26 +1,27 @@
+import { CssBaseline } from '@material-ui/core';
+import Theme from 'components/Theme';
+import configureStore, { history } from 'configure-store';
+import { ConnectedRouter } from 'connected-react-router/immutable';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from 'react-redux';
+import routes from 'routes';
+import NavigationHeader from 'views/components/NavigationHeader';
+import './App.scss';
+
+const store = configureStore();
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Theme>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <CssBaseline />
+          <NavigationHeader />
+          {routes}
+        </ConnectedRouter>
+      </Provider>
+    </Theme>
   );
-}
+};
 
 export default App;
